@@ -15,21 +15,9 @@ public class TicTacToe extends JPanel
     static  int value=0;
     static String winner = null;
     static  JLabel information=new JLabel("<html>Welcome to TicTacToe Tournament.<br/>X plays first.<br/> Click  the center of a slot to place in:");
-    static int amtGame;
-    static int gameCount;
 
-    static Integer[] options = {1,3};
 
-    public static void main(String[] args) {
-        Object selected = JOptionPane.showInputDialog(null,"test","How many games",JOptionPane.DEFAULT_OPTION,null,options,"0");
-        amtGame =(int)selected;
-
-        //to do repeat game after completing
-        startGame();
-
-    }
-
-    static void startGame()
+    public void startGame()
     {
 
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,7 +30,7 @@ public class TicTacToe extends JPanel
             turn = "X";
 
             populateEmptyBoard();
-            gameCount += 1;
+            //gameCount += 1;
 
     }
 
