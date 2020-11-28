@@ -27,7 +27,7 @@
   <component name="ProjectId" id="1kD5McNEaMF8gsVLNK40nardV3W" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Java/assignment2/project" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Java/assignment1/Project" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -93,7 +93,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

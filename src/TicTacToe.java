@@ -16,32 +16,84 @@ public class TicTacToe extends JPanel
     static String winner = null;
     static  JLabel information=new JLabel("<html>Welcome to TicTacToe Tournament.<br/>X plays first.<br/> Click  the center of a slot to place in:");
 
+    static JFrame frame2 = new JFrame();
+    static JLabel victor = new JLabel();
+    static JButton next = new JButton("Next");
+    //
+    static String player1Name;
+    static String player2Name;
+    static String curPlayer;
+    static int p1Games =0;
+    static int p2Games=0;
+    static int drawGames=0;
+    static int curGame;
 
-    public void startGame()
+
+
+    public void startGame(int cGame,String p1,String p2)
     {
+        curGame=cGame;
+        player1Name = p1;
+        player2Name = p2;
+        reset();
+        frame.setTitle("Game #: "+(cGame+1) );
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setLayout(null);
+        TicTacToe ticTacToe = new TicTacToe();
+        frame.add(ticTacToe);
+        frame.setContentPane(ticTacToe);
+        frame.setVisible(true);
+        board = new String[9];
 
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            TicTacToe ticTacToe = new TicTacToe();
-            frame.add(ticTacToe);
-            frame.setContentPane(ticTacToe);
+        turn = "X";
 
-            frame.setVisible(true);
-            board = new String[9];
-            turn = "X";
 
-            populateEmptyBoard();
-            //gameCount += 1;
+        populateEmptyBoard();
+    }
 
+    public void reset()
+    {
+        board = null;
+        turn=null;
+        buttons= new ArrayList<JButton>();
+        frame=new JFrame();
+        frame2=new JFrame();
+        next = new JButton("Next");
+        value=0;
+        winner=null;
+        information.setText("<html>Welcome to TicTacToe Tournament.<br/>"+player1Name+" plays first.<br/> Click  the center of a slot to place in:");
+
+        frame2 = new JFrame();
+        victor = new JLabel();
     }
 
     //In winningText, checkWinner is called to see if a player has won. If the player won or a draw occurred, the label on the window is updated to show it.
-    static void winningText() {
+     void winningText() {
         winner=checkWinner();
+         if (winner == "X")
+         {
+            p1Games+=1;
+             winner=player1Name;
+         }
+         else if (winner=="O")
+         {
+             winner=player2Name;
+             p2Games+=1;
+         }
         if(winner!=null) {
-            if (winner.equalsIgnoreCase("draw")) {
+            if (winner.equalsIgnoreCase("draw"))
+            {
+                drawGames+=1;
                 information.setText("<html>It's a draw!<br/>");
-            } else {
+                victor.setText("<html>It's a draw!<br/>");
+                frame.dispatchEvent(new WindowEvent(frame,WindowEvent.WINDOW_CLOSING));
+                gameEnd();
+            }
+            else {
                 information.setText("<html>Congratulations!<br/> "+ winner+ " has won!<br/> Thanks for playing.");
+                victor.setText("<html>Congratulations!<br/> "+ winner+ " has won!<br/> Thanks for playing.");
+                frame.dispatchEvent(new WindowEvent(frame,WindowEvent.WINDOW_CLOSING));
+                gameEnd();
             }
         }
     }
@@ -87,15 +139,19 @@ public class TicTacToe extends JPanel
             if (Arrays.asList(board).contains("Empty")){
                 break;
             }
-            else if (a == 8) return "draw";
+            else if (a == 8)
+                return "draw";
+
         }
-        information.setText("<html>"+turn+"'s turn.<br/> Click near the center of a slot to place "+turn+" in.");
+        if (turn == "X"){curPlayer=player1Name;}
+        else if (turn=="O"){curPlayer=player2Name;}
+        information.setText("<html>"+curPlayer+"'s turn.<br/> Click near the center of a slot to place "+turn+" in.");
         return null;
     }
 
 
     //In this function, buttons are created for the player to put his/her/their turns in. Every time a player clicks on an applicable button, the board array is updated.
-    static void populateEmptyBoard() {
+     void populateEmptyBoard() {
         frame.setLayout(null);
         information.setBounds(10,160, 400, 400);
         frame.add(information);
@@ -154,4 +210,31 @@ public class TicTacToe extends JPanel
         }
 
     }
+
+    public void gameEnd()
+    {
+        frame2.setTitle("Results");
+        frame2.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame2.setLayout(null);
+        JPanel closing = new JPanel();
+        frame2.setContentPane(closing);
+        frame2.add(victor);
+
+        frame2.add(next);
+        frame2.setVisible(true);
+        frame2.setSize(300,100);
+        frame2.setResizable(false);
+        //
+        next.addActionListener(actionEvent ->
+        {
+            if (actionEvent.getSource()==next) {
+                curGame += 1;
+                frame2.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+                Home.game(player1Name, player2Name, p1Games, p2Games, drawGames, curGame);
+            }
+
+        });
+
+    }
+
 }
