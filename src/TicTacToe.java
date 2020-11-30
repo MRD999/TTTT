@@ -216,13 +216,12 @@ public class TicTacToe extends JPanel
         frame2.setTitle("Results");
         frame2.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame2.setLayout(null);
-        JPanel closing = new JPanel();
-        frame2.setContentPane(closing);
         frame2.add(victor);
-
+        victor.setBounds(90,10,300,50);
         frame2.add(next);
+        next.setBounds(45,100,200,40);
         frame2.setVisible(true);
-        frame2.setSize(300,100);
+        frame2.setSize(300,200);
         frame2.setResizable(false);
         //
         next.addActionListener(actionEvent ->

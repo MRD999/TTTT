@@ -91,6 +91,7 @@ public class Home
             frameResults.add(lblBody);
             lblBody.setBounds(50,50,200,60);
             frameResults.setSize(300,200);
+            frameResults.setResizable(false);
             frameResults.setVisible(true);
 
         }
