@@ -201,7 +201,7 @@ public class TicTacToe extends JPanel
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         int x=100;
-        g.setColor(Color.BLACK);
+        g.setColor(Color.BLUE);
         for(int i=0; i<2; i++) {
             g.drawLine(0, 0+x, 300,0+x);
             if(i==2) break;
